@@ -3,13 +3,13 @@
 shopt -s nullglob globstar
 
 wl_copy_args=("-o")
-wofi_args=("")
+tofi_args=("")
 
 usage() {
-	echo -e "Wofi based interface for pass
+	echo -e "tofi based interface for pass
 
 Usage:
-wofipassmenu [Options]
+tofipassmenu [Options]
 
 Options:
 	-h	Help
@@ -41,13 +41,13 @@ done
 shift $(expr $OPTIND - 1 )
 
 [[ $1 = "--" ]] && shift
-wofi_args=$@
+tofi_args=$@
 prefix=${PASSWORD_STORE_DIR-~/.password-store}
 password_files=( "$prefix"/**/*.gpg )
 password_files=( "${password_files[@]#"$prefix"/}" )
 password_files=( "${password_files[@]%.gpg}" )
 
-password=$(printf '%s\n' "${password_files[@]}" | wofi -m -i -p "Password name" -O alphabetical --show dmenu $wofi_args)
+password=$(printf '%s\n' "${password_files[@]}" | tofi -m -i -p "Password name" -O alphabetical --show dmenu $tofi_args)
 
 [[ -n $password ]] || exit
 
